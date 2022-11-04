@@ -95,5 +95,8 @@ session_start();
 
 $_SESSION["id_user"]= $user["id_user"];
 
-?>
+//Redirección de la URL
+header("Location: inventiory.php")
+
+;?>
 
