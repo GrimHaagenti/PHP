@@ -1,7 +1,8 @@
 <?php
 
 $db_server = "localhost";
-$db_user = "deus";
-$db_pass = "deus";
+$db_user = "enti";
+$db_pass = "enti";
 $db = "inventiory";
+$localIp = gethostbyname(gethostname().".");
 ?>

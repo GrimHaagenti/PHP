@@ -87,6 +87,7 @@ $icon_quotes = filter_var($icon, FILTER_SANITIZE_ADD_SLASHES);
 $id_armour_type = trim($_POST["id_armour_type"]);
 if(strlen($id_armour_type) < 1){
 	echo"ERROR 8: ID mal formada";
+
 	exit;
 }
 

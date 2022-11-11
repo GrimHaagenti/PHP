@@ -38,8 +38,21 @@ if($balance === false){
 	$balance = "NO HAY CUENTA BANCARIA";
 }
 
+$nameQuery = <<<EOD
+SELECT name FROM users WHERE id_user=$id_user;
+EOD;
+
+$res = $conn->query($nameQuery);
+
+$userObj = $res->fetch_assoc();
+
+$userName = $userObj["name"];
+
+echo "$userName";
+
+
 $content = <<<EOD
-<h1>Bienvenido/a</h1>
+<h1>Bienvenido/a, $userName</h1>
 <p>Tienes: $balance</p>
 EOD;
 

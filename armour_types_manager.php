@@ -43,7 +43,11 @@ $res = $conn->query($query);
 
 if(!$res){
 	echo "ERROR DB 2: Query mal formada";
+	echo "$type" . "$icon";
 	exit;
+}
+else{
+header("Location: inventiory.php");
 }
 
 //require_once("login_manager.php");

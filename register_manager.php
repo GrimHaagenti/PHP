@@ -144,7 +144,7 @@ if ($res->num_rows >= 1){echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAnop"; exit;}
 
 $query = <<<EOD
 
-	INSERT INTO users(username, nombre, password, birthdate, email, register)
+	INSERT INTO users(username, name, password, birthdate, email, register)
 	VALUES ("$user", "$name", "$password", "$bdate", "$email", now() );
 	EOD;
 
@@ -158,11 +158,13 @@ exit;
 
 }
 
-if ($res->num_rows != 1){
-	echo "ERROR DB 3: Login incorrecto";
-	exit;
+$lastId = $conn->insert_id;
 
-	}
+session_start();
+
+$_SESSION["id_user"] = intval($lastId);
+
+header("Location: inventiory.php");
 
 
 
