@@ -16,7 +16,7 @@ echo <<<EOD
 <head>
 
 	<title>$title </title>
-
+	<link rel="stylesheet" href="inventiory.css"/>
 </head>
 
 EOD;

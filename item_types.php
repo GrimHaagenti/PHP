@@ -1,5 +1,13 @@
 <?php
 
+session_start();
+
+if(intval($_SESSION["id_user"]) != 1)
+{echo "No eres admin";
+exit;
+
+}
+
 require("template.php");
 
 print_head("Item Type");

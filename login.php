@@ -8,7 +8,7 @@ print_head("Página de Login");
 
 $form = <<<EOD
 
-
+<article>
 <form method="POST" action="login_manager.php" id="login-form">
 <p>
 <label for="login_user"> User: </label>
@@ -63,7 +63,7 @@ $register_form = <<<EOD
 
 
 </form>
-
+</article>
 EOD;
 
 

@@ -1,36 +1,25 @@
 <?php
 
-//require_once("login_manager.php");
+/// ADD ITEM TYPES MANAGER ///
 
-//session_start();
+session_start();
 
-//$_SESSION["id_user"] = $user["id_user"];
-
-if (isset($_POST["type"])
-&& isset($_POST["icon"])
-){
-	echo"NO PROBLEMO AMIGO ";
+if(intval($_SESSION["id_user"]) != 1){
+echo "No eres Admin";
+exit;
 
 }
 
-//echo $_POST["type"]." ".$_POST["icon"]." ";
-
-if (!isset($_POST["type"])){
-	echo"Type missing ";
-}
-if (!isset($_POST["icon"])){
-	echo"icon missing ";
-}
 
 if (!isset($_POST["type"])
 || !isset($_POST["icon"])
 ){
-	echo"ERROR 1: Formulario no enviado";
+	echo "Error 1: Formulario no enviadito";
 	exit;
 }
 
 
-/* ITEM TYPE CHECK */
+// ITEM TYPE CHECK 
 
 $type = trim($_POST["type"]);
 if(strlen($type) < 4){
@@ -66,7 +55,8 @@ if(!$res){
 	echo "ERROR DB 2: Query mal formada";
 	exit;
 }
-
-
-
+else
+{
+header("Location: inventiory.php");
+}
 ?>

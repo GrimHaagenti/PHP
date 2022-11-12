@@ -1,5 +1,13 @@
 <?php
 
+session_start();
+
+if(intval($_SESSION["id_user"]) != 1)
+{
+echo "No eres Admin";
+exit;
+}
+
 require("template.php");
 
 print_head("Weapon Type");

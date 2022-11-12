@@ -1,16 +1,15 @@
 <?php
 
-/// ADD ARMOUR MANAGER
-
 session_start();
 
-if(intval($_SESSION["id_user"]) != 1){
-echo "No eres Admin";
+if(intval($_SESSION["id_user"]) != 1)
+{
+echo "No eres admin";
 exit;
 }
 
-if (!isset($_POST["id_armour_type"])
-|| !isset($_POST["armour"])  
+if (!isset($_POST["id_weapon_type"])
+|| !isset($_POST["weapon"])  
 || !isset($_POST["description"])  
 || !isset($_POST["value"])  
 || !isset($_POST["weight"])  
@@ -22,21 +21,21 @@ if (!isset($_POST["id_armour_type"])
 }
 
 
-// ARMOUR CHECK 
+// WEAPON CHECK
 
-$armour = trim($_POST["armour"]);
-if(strlen($armour) < 2){
-	echo"ERROR 3: Armadura mal formada";
+$weapon = trim($_POST["weapon"]);
+if(strlen($weapon) < 2){
+	echo"ERROR 3: Arma mal formada";
 	exit;
 }
 
-$armour_quotes = filter_var($armour, FILTER_SANITIZE_ADD_SLASHES);
+$weapon_quotes = filter_var($weapon, FILTER_SANITIZE_ADD_SLASHES);
 
-if($armour != $armour_quotes){
-	echo"ERROR 3.1: Armadura mal formada";
+if($weapon != $weapon_quotes){
+	echo"ERROR 3.1: Arma mal formada";
 }
 
-// DESC CHECK
+/* DESC CHECK */
 
 $description = trim($_POST["description"]);
 if(strlen($description) < 2){
@@ -50,7 +49,7 @@ if($description != $description_quotes){
 	echo"ERROR 3.1: Descripción mal formada";
 }
 
-// VALUE CHECK
+/* VALUE CHECK */
 
 $value = trim($_POST["value"]);
 if(strlen($value) < 1){
@@ -60,7 +59,7 @@ if(strlen($value) < 1){
 
 $value = floatval($value);
 
-// WEIGHT CHECK
+/* WEIGHT CHECK */
 
 $weight = trim($_POST["weight"]);
 if(strlen($weight) < 1){
@@ -70,7 +69,7 @@ if(strlen($weight) < 1){
 
 $weight = floatval($weight);
 
-// RARITY CHECK
+/* RARITY CHECK */
 
 $rarity = trim($_POST["rarity"]);
 if(strlen($rarity) < 1){
@@ -80,7 +79,7 @@ if(strlen($rarity) < 1){
 
 $rarity = intval($rarity);
 
-// ICON CHECK
+/* ICON CHECK */
 
 $icon = trim($_POST["icon"]);
 if(strlen($icon) < 2){
@@ -91,16 +90,16 @@ if(strlen($icon) < 2){
 $icon_quotes = filter_var($icon, FILTER_SANITIZE_ADD_SLASHES);
 
 
-// ID ARMOUR TYPE CHECK
+/* ID ARMOUR TYPE CHECK */
 
-$id_armour_type = trim($_POST["id_armour_type"]);
-if(strlen($id_armour_type) < 1){
+$id_weapon_type = trim($_POST["id_weapon_type"]);
+if(strlen($id_weapon_type) < 1){
 	echo"ERROR 8: ID mal formada";
 
 	exit;
 }
 
-$id_armour_type = intval($id_armour_type);
+$id_weapon_type = intval($id_weapon_type);
 
 
 //DB CONNECTION
@@ -116,8 +115,8 @@ if($conn->errno)
 }
 
 $query = <<<EOD
-INSERT INTO armours (armour, description, cost, weight, rarity, icon, id_armour_type)
-VALUES("$armour", "$description", "$value", "$weight", "$rarity", "$icon", $id_armour_type);
+INSERT INTO weapons (weapon, description, cost, weight, rarity, icon, id_weapon_type)
+VALUES("$weapon", "$description", "$value", "$weight", "$rarity", "$icon", $id_weapon_type);
 EOD;
 
 

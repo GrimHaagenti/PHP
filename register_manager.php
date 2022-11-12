@@ -140,7 +140,7 @@ exit;
 }
 
 
-if ($res->num_rows >= 1){echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAnop"; exit;} 
+if ($res->num_rows >= 1){echo "Nombre de usuario en uso, escoja otro."; exit;} 
 
 $query = <<<EOD
 
@@ -159,6 +159,18 @@ exit;
 }
 
 $lastId = $conn->insert_id;
+
+$query = <<<EOD
+	INSERT INTO bank_accounts(balance, id_user)
+	VALUES (10000.00, $lastId);
+	EOD;
+
+$res = $conn->query($query);
+
+if (!$res){
+echo "ERROR DB3: query mal formada";
+exit;
+}
 
 session_start();
 

@@ -1,6 +1,6 @@
 <?php
 
-/// SHOP ARMOUR MANAGER ///
+/// SHOP ITEM MANAGER ///
 
 session_start();
 
@@ -12,8 +12,6 @@ if(!isset($_SESSION["id_user"])){
 $id_user = intval($_SESSION["id_user"]);
 
 
-
-
 require_once("db_config.php");
 
 $conn = new mysqli($db_server, $db_user, $db_pass, $db);
@@ -23,17 +21,17 @@ if($conn->errno){
 	exit;
 }
 
-if (!isset($_POST["id_armour"])){
+if (!isset($_POST["id_item"])){
 	echo "ERROR 2: Formulario no recibido";
 	exit;
 }
 
-$id_armour = intval($_POST["id_armour"]);
+$id_item = intval($_POST["id_item"]);
 
 $query = <<<EOD
 SELECT cost 
-FROM armours
-WHERE id_armour=$id_armour;
+FROM items
+WHERE id_item=$id_item;
 EOD;
 
 $res = $conn->query($query);
@@ -44,11 +42,13 @@ if(!$res){
 }
 
 if($res->num_rows != 1){
-	echo"ERROR 4: Armadura inexistente";
+	echo"ERROR 4: Objeto inexistente";
 	exit;
 }
-//Guardamos info de la armadura
-$armour = $res->fetch_assoc();
+
+
+// Guardamos info de la arma
+$item = $res->fetch_assoc();
 
 
 
@@ -69,19 +69,20 @@ if($res->num_rows != 1){
 	echo"ERROR 6: Cuenta inexistente";
 	exit;
 }
-//Cuenta del usuario activo
+
+// Cuenta del usuario activo
 $userAcc = $res->fetch_assoc();
 
 
 //require_once(bank_func.php);
 $balance = $userAcc["balance"];
 
-if($balance < $armour["cost"]){
+if($balance < $item["cost"]){
 	echo"Balance insuficiente";
 	exit;
 }
 
-$balance = $balance - $armour["cost"];
+$balance = $balance - $item["cost"];
 
 $query = <<<EOD
 UPDATE bank_accounts
@@ -99,8 +100,8 @@ if(!$res){
 //Insertamos obj
 
 $query = <<<EOD
-INSERT INTO armours_users(id_armour, id_user, purchased)
-VALUES($id_armour, $id_user, now());
+INSERT INTO inventory_items(id_item, id_user, purchased)
+VALUES($id_item, $id_user, now());
 EOD;
 
 $res = $conn->query($query);

@@ -1,6 +1,14 @@
 <?php
 
 
+session_start();
+
+if(intval($_SESSION["id_user"]) != 1 )
+{
+echo "No eres Admin";
+exit;
+}
+
 if (!isset($_POST["type"])
 || !isset($_POST["icon"])
 ){
@@ -9,7 +17,7 @@ if (!isset($_POST["type"])
 }
 
 
-/* WEAPON TYPE CHECK */
+// WEAPON TYPE CHECK //
 
 $type = trim($_POST["type"]);
 if(strlen($type) < 4){
@@ -45,7 +53,10 @@ if(!$res){
 	echo "ERROR DB 2: Query mal formada";
 	exit;
 }
-
+else
+{
+header("Location: inventiory.php");
+}
 //require_once("login_manager.php");
 
 //session_start();

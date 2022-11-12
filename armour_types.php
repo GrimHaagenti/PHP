@@ -1,5 +1,17 @@
 <?php
 
+/// ADD ARMOUR TYPES ///
+
+
+session_start();
+
+if(intval($_SESSION["id_user"]) != 1)
+{
+	echo "No eres Admin. Largo";
+	exit;
+}
+
+
 require("template.php");
 
 print_head("Armour Type");
